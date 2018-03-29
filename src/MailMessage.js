@@ -42,7 +42,6 @@ export default class MailMessage {
 		// send mail with defined transport object
 //		console.log('mailOptions: ', mailOptions);
 		transporter.sendMail(mailOptions, (error, info) => {
-			console.log('sendMail returned error ', error, ', info ', info);
 			if (error) {
 				return console.log(error);
 			}

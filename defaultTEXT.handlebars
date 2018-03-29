@@ -1,4 +1,5 @@
 {{subject}}
+=============================================================================
 
 {{#if messages}}
 ★ Messages:
@@ -15,7 +16,9 @@
 {{/if}}
 
 {{#each fixtures as |fixture name|}}
+-----------------------------------------------------------------------------
 Fixture: {{name}}
+-----------------------------------------------------------------------------
   {{#each fixture.tests as |test testName|}}
   Test: {{testName}} {{#if test.formattedErrs}}✗ FAILED
     ERRORS:
@@ -26,4 +29,5 @@ Fixture: {{name}}
 ✔ PASSED
 {{/if}}
   {{/each}}
+
 {{/each}}

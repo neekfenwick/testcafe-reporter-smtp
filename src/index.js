@@ -25,7 +25,7 @@ export default function () {
 			this.reportOnlyFailures = envs('TESTCAFE_SMTP_REPORTONLYFAILURES', 'true');
             this.startTime = startTime;
             this.testCount = testCount;
-			this.fixtureInfo = {}; // keyed by fixture name
+			this.fixtureInfo = {}; // keyed by fixture name, data for email template
 			this.messages = [];
 			this.smtpOptions = {
 				host: envs('TESTCAFE_SMTP_SMTPHOST', 'smtp.example.com'),
@@ -34,8 +34,8 @@ export default function () {
 				auth: {
 					user: envs('TESTCAFE_SMTP_SMTPUSER', 'username'),
 					pass: envs('TESTCAFE_SMTP_SMTPPASS', 'password')
-				},
-				logger: true
+				}
+				//,logger: true  - produce verbose nodemailer output on command line
 			};
 
             this.messages.push(`Starting testcafe ${startTime}. \n Running tests in: ${userAgents}`);
@@ -46,7 +46,6 @@ export default function () {
 			this.fixtureInfo[name] = {
 				tests: {}
 			};
-//            this.mail.addLine(this.currentFixtureName);
         },
 
         reportTestDone (name, testRunInfo) {
@@ -59,14 +58,6 @@ export default function () {
 			console.log('Test (' + name + ') results: ', testRunInfo);
 			// Record this test's results in the hash for this fixture.
 			this.fixtureInfo[this.currentFixtureName].tests[name] = testRunInfo;
-//            const hasErr = testRunInfo.errs.length > 0;
-//            const result = hasErr ? ':heavy_multiplication_x:' : ':heavy_check_mark: ';
-//
-//            this.mail.addLine(`${result} ${name}`);
-//
-//            if (hasErr) {
-//                this.renderErrors(testRunInfo.errs);
-//            }
         },
 
         renderErrors(errors) {
@@ -91,6 +82,11 @@ export default function () {
 			let subject = failedCount === 0 ?
                 `Tests passed OK : ${this.testCount} passed of ${this.testCount}` :
                 `TESTS FAILING : ${failedCount} of ${this.testCount} failed`;
+
+			if (failedCount === 0 && envs('TESTCAFE_SMTP_REPORTONLYFAILURES', '') === 'true') {
+				console.log('reporter-smtp: No failures, not sending email.');
+				return;
+			}
 
 			// Pass all our data to the email builder for templating and sending.
 			let mail = new MailMessage({
