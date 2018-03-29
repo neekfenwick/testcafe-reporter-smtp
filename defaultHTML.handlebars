@@ -1,0 +1,75 @@
+<style>
+html, body { font: Arial, font-size: 12px; }
+fieldset {
+	padding-left: 1.5em;
+    margin: 0 1em;
+    border: 1px solid grey;
+    border-radius: 0.2em;
+}
+legend { font-size: 1.2em; }
+ul {
+	margin: 0;
+	padding: 0 0 0 0.4em;
+}
+li {
+	margin: 0.4em 0;
+}
+.messages {
+	background-color: #d7eaf1;
+}
+.warnings {
+	background-color: pink;
+}
+.errors {
+	background-color: #ffb9c0;
+}
+.test-result.failed {
+	color: red;
+}
+.test-result.passed {
+	color: green;
+}
+</style>
+<h1>{{subject}}</h1>
+{{#if messages}}
+<fieldset class="messages"><legend>★ Messages</legend>
+<ul>
+{{#each messages}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+</fieldset>
+{{/if}}
+
+{{#if warnings}}
+<fieldset class="warnings"><legend>☔ Warnings:</legend>
+<ul>
+{{#each warnings}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+</fieldset>
+{{/if}}
+
+{{#each fixtures as |fixture name|}}
+{{log 'This is fixture ' name}}
+{{log this}}
+<fieldset class="fixture"><legend>Fixture: {{name}}</legend>
+  <ul>
+  {{#each fixture.tests as |test testName|}}
+	<li>Test: {{testName}}
+{{#if test.formattedErrs}}
+<span class="test-result failed">✗ FAILED</span>
+<ul class="errors">
+{{#each test.formattedErrs}}
+<li><pre>{{this}}</pre></li>
+{{/each}}
+</ul>
+{{else}}
+<span class="test-result passed">✔ PASSED</span>
+{{/if}}
+    </li>
+  {{/each}}
+  </ul>
+</fieldset>
+{{/each}}

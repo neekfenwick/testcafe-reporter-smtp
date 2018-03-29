@@ -1,14 +1,14 @@
 {
-  "name": "testcafe-reporter-slack",
-  "version": "0.0.6",
-  "description": "TestCafe slack reporter plugin.",
+  "name": "testcafe-reporter-smtp",
+  "version": "0.0.1",
+  "description": "TestCafe SMTP reporter plugin.",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Shafied/testcafe-reporter-slack.git"
+    "url": "git@github.com:neekfenwick/testcafe-reporter-smtp.git"
   },
   "author": {
-    "name": "Shafied",
-    "email": "shafiedn@gmail.com"
+    "name": "Nick Fenwick",
+    "email": "neek@nickfenwick.com"
   },
   "main": "lib/index",
   "files": [
@@ -29,8 +29,9 @@
   "devDependencies": {
     "callsite-record": "^3.2.0",
     "del": "^1.2.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-babel": "^5.2.1",
+    "gulp-env": "^0.4.0",
     "gulp-mocha": "^2.2.0",
     "normalize-newline": "^1.0.2",
     "publish-please": "^2.1.4",
@@ -38,8 +39,11 @@
     "testcafe": "^0.2.0-alpha"
   },
   "dependencies": {
-    "slack-node": "^0.1.8",
+    "config": "^1.30.0",
     "dotenv": "^4.0.0",
-    "envs": "^0.1.6"
+    "envs": "^0.1.6",
+    "gulp-cli": "^2.0.1",
+    "handlebars": "^4.0.11",
+    "nodemailer": "^4.6.3"
   }
 }

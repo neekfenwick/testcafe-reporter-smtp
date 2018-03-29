@@ -1,0 +1,29 @@
+{{subject}}
+
+{{#if messages}}
+★ Messages:
+{{#each messages}}
+ - {{this}}
+{{/each}}
+{{/if}}
+
+{{#if warnings}}
+☔ Warnings:
+{{#each warnings}}
+ - {{this}}
+{{/each}}
+{{/if}}
+
+{{#each fixtures as |fixture name|}}
+Fixture: {{name}}
+  {{#each fixture.tests as |test testName|}}
+  Test: {{testName}} {{#if test.formattedErrs}}✗ FAILED
+    ERRORS:
+{{#each test.formattedErrs}}
+{{this}}
+{{/each}}
+{{else}}
+✔ PASSED
+{{/if}}
+  {{/each}}
+{{/each}}
