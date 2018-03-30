@@ -1,3 +1,5 @@
 .idea
 node_modules
 media
+lib/*.js
+lib/templates

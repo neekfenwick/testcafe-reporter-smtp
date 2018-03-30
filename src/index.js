@@ -14,6 +14,7 @@ const envs = require('envs');
 const configSource = envs('TESTCAFE_SMTP_CONFIG_FILE');
 const dotenvOptions = configSource ? { path: configSource } : null;
 require('dotenv').config(dotenvOptions);
+const path = require('path');
 import MailMessage from './MailMessage'
 
 export default function () {
@@ -30,13 +31,17 @@ export default function () {
 			this.smtpOptions = {
 				host: envs('TESTCAFE_SMTP_SMTPHOST', 'smtp.example.com'),
 				port: envs('TESTCAFE_SMTP_SMTPPORT', 587),
-				secure: false, // true for 465, false for other ports
 				auth: {
 					user: envs('TESTCAFE_SMTP_SMTPUSER', 'username'),
 					pass: envs('TESTCAFE_SMTP_SMTPPASS', 'password')
 				}
-				//,logger: true  - produce verbose nodemailer output on command line
+//				,logger: true  // produce verbose nodemailer output on command line
 			};
+			// Include secure if it is defined, else let it default.
+			var secure = envs('TESTCAFE_SMTP_SECURE', '');
+			if (secure) {
+				this.smtpOptions.secure = secure;
+			}
 
             this.messages.push(`Starting testcafe ${startTime}. \n Running tests in: ${userAgents}`);
         },
@@ -99,8 +104,8 @@ export default function () {
 				fixtures: this.fixtureInfo
 			}, {
 				smtpOptions: this.smtpOptions,
-				htmlTemplateFile: envs('TESTCAFE_SMTP_HTML_EMAIL_TEMPLATE', 'defaultHTML.handlebars'),
-				textTemplateFile: envs('TESTCAFE_SMTP_TEXT_EMAIL_TEMPLATE', 'defaultTEXT.handlebars')
+				htmlTemplateFile: envs('TESTCAFE_SMTP_HTML_EMAIL_TEMPLATE', path.join(__dirname, 'templates/defaultHTML.handlebars')),
+				textTemplateFile: envs('TESTCAFE_SMTP_TEXT_EMAIL_TEMPLATE', path.join(__dirname, 'templates/defaultTEXT.handlebars'))
 			});
 			mail.send();
         }

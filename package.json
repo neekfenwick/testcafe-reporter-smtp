@@ -42,6 +42,7 @@
     "dotenv": "^4.0.0",
     "envs": "^0.1.6",
     "gulp-cli": "^2.0.1",
+    "gulp-env": "^0.4.0",
     "handlebars": "^4.0.11",
     "nodemailer": "^4.6.3"
   }
