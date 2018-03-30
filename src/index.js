@@ -35,7 +35,7 @@ export default function () {
 					user: envs('TESTCAFE_SMTP_SMTPUSER', 'username'),
 					pass: envs('TESTCAFE_SMTP_SMTPPASS', 'password')
 				}
-				//,logger: true  - produce verbose nodemailer output on command line
+				,logger: true  // produce verbose nodemailer output on command line
 			};
 
             this.messages.push(`Starting testcafe ${startTime}. \n Running tests in: ${userAgents}`);
@@ -99,8 +99,8 @@ export default function () {
 				fixtures: this.fixtureInfo
 			}, {
 				smtpOptions: this.smtpOptions,
-				htmlTemplateFile: envs('TESTCAFE_SMTP_HTML_EMAIL_TEMPLATE', 'defaultHTML.handlebars'),
-				textTemplateFile: envs('TESTCAFE_SMTP_TEXT_EMAIL_TEMPLATE', 'defaultTEXT.handlebars')
+				htmlTemplateFile: envs('TESTCAFE_SMTP_HTML_EMAIL_TEMPLATE', './templates/defaultHTML.handlebars'),
+				textTemplateFile: envs('TESTCAFE_SMTP_TEXT_EMAIL_TEMPLATE', './templates/defaultTEXT.handlebars')
 			});
 			mail.send();
         }

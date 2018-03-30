@@ -7,7 +7,11 @@ gulp.task('clean', function (cb) {
     del('lib', cb);
 });
 
-gulp.task('build', ['clean'], function () {
+gulp.task('copyTemplates', ['clean'], function () {
+	return gulp.src('src/templates/*').pipe(gulp.dest('lib/templates'));
+});
+
+gulp.task('build', ['copyTemplates'], function () {
     return gulp
         .src('src/**/*.js')
         .pipe(babel())
