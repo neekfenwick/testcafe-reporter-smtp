@@ -34,8 +34,8 @@ export default function () {
 				auth: {
 					user: envs('TESTCAFE_SMTP_SMTPUSER', 'username'),
 					pass: envs('TESTCAFE_SMTP_SMTPPASS', 'password')
-				}
-//				,logger: true  // produce verbose nodemailer output on command line
+				},
+				logger: envs('TESTCAFE_SMTP_LOGGER', 'false') === 'true'
 			};
 			// Include secure if it is defined, else let it default.
 			var secure = envs('TESTCAFE_SMTP_SECURE', '');

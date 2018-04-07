@@ -4,12 +4,12 @@
 This is a reporter for [TestCafe](http://devexpress.github.io/testcafe). It sends the output of the test as an email via SMTP.
 
 ##Purpose
-Once configured the reporter builds an email (HTML and text format) and sends via an SMTP service.
+Once configured the reporter builds an email (HTML and text format) and sends via an SMTP service.  This means your test results will be emailed to you in a nicely formatted email.
 
 ##Setup instructions
-Follow the instructions bellow to configure this plugin. 
-	
-First install this package globally to the machine you would like to run your tests on and then:
+
+    $ npm install testcafe-reporter-smtp
+
 
 ## Configuration
 
@@ -28,6 +28,7 @@ The aim is that you can specify the below configuration parameters either entire
 - TESTCAFE_SMTP_SECURE   - true | false - passed to the `nodemailer` *secure* option (see [Security and TLS](#security-and-tls) below)
 - TESTCAFE_SMTP_TO_LIST  - comma separated list of email addresses to send reports to
 - TESTCAFE_SMTP_REPORTONLYFAILURES - causes no email to be sent if all tests passed (when you only want to be notified of tests failing)
+- TESTCAFE_SMTP_LOGGER   - true | false - passed to the `nodemailer` *logger* option, causes verbose output on the console
 
 ### Security and TLS
 
@@ -38,7 +39,16 @@ You probably want the connection to your SMTP server to be encrypted using TLS. 
 So, if you leave out `TESTCAFE_SMTP_SECURE`, the reporter will make a plaintext connection to your server, but if it response with STARTTLS then the connection will be upgraded to encryption using TLS before authentication is performed.
 
 ## Testing
-Running TestCafe with testcafe-reporter-smtp.
+
+Run the unit tests, which set a dummy SMTP hostname that causes the reporter to not actually send the email it has built.
+
+    $ npm test
+
+The unit test uses Mocha, and does not actually invoke a Testcafe test run.
+
+## Usage with TestCafe
+
+You can run TestCafe with testcafe-reporter-smtp either via the command line, or via a test runner.
 
 You must have an SMTP server available to test and a username on it, e.g. gmail.com with your Google credentials.
 
@@ -52,21 +62,39 @@ You must have an SMTP server available to test and a username on it, e.g. gmail.
 
 Alternatively, call the config file anything you want and set `TESTCAFE_SMTP_CONFIG_FILE=<filename>`.
 
-- Now run your tests from the commmand line:
+### Running tests from the commmand line:
 
 ```
 $ testcafe chrome 'path/to/test/file.js' --reporter smtp
 ```
 
+### Running tests from a runner:
+
 When you use TestCafe API, you can pass the reporter name to the `reporter()` method:
 
 ```js
-testCafe
-    .createRunner()
-    .src('path/to/test/file.js')
-    .browsers('chrome')
-    .reporter('smtp') // <-
-    .run();
+const createTestCafe = require('testcafe');
+let runner           = null;
+let testcafe         = null;
+
+createTestCafe('localhost', 1337, 1338)
+    .then(tc => {
+		testcafe = tc;
+        runner = tc.createRunner();
+
+        return runner
+			.src('index.ts') // This is the test fixture to run
+			.browsers(['chrome'])
+			.reporter('smtp') // This tells it to look for testcafe-reporter-smtp
+			.run()
+			.then(failedCount => {
+				console.log('Runner finished, failedCount: ', failedCount);
+				testcafe.close();
+			})
+			.catch(error => {
+				console.error('Caught error: ', error);
+			});
+});
 ```
 
 ##Further Documentation
