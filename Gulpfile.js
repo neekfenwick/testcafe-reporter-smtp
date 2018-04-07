@@ -5,7 +5,7 @@ var mocha   = require('gulp-mocha');
 var del     = require('del');
 
 gulp.task('clean', function (cb) {
-    del('lib', cb);
+    del(['lib/**/*', '!lib/.gitignore'], cb);
 });
 
 gulp.task('copyTemplates', ['clean'], function () {
