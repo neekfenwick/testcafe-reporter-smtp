@@ -20,13 +20,13 @@
 Fixture: {{name}}
 -----------------------------------------------------------------------------
   {{#each fixture.tests as |test testName|}}
-  Test: {{testName}} {{#if test.formattedErrs}}✗ FAILED
+  Test: {{testName}} {{#if test.formattedErrs}}✗ FAILED in {{durationMs}}ms
     ERRORS:
 {{#each test.formattedErrs}}
 {{this}}
 {{/each}}
 {{else}}
-✔ PASSED
+✔ PASSED in {{durationMs}}ms
 {{/if}}
   {{/each}}
 

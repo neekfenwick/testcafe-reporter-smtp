@@ -59,14 +59,14 @@ li {
   {{#each fixture.tests as |test testName|}}
 	<li>Test: {{testName}}
 {{#if test.formattedErrs}}
-<span class="test-result failed">✗ FAILED</span>
+<span class="test-result failed">✗ FAILED in {{durationMs}}ms</span>
 <ul class="errors">
 {{#each test.formattedErrs}}
 <li><pre>{{this}}</pre></li>
 {{/each}}
 </ul>
 {{else}}
-<span class="test-result passed">✔ PASSED</span>
+<span class="test-result passed">✔ PASSED in {{durationMs}}ms</span>
 {{/if}}
     </li>
   {{/each}}
