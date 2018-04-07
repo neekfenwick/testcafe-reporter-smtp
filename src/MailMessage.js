@@ -1,4 +1,3 @@
-const envs = require('envs');
 import nodemailer from 'nodemailer';
 import handlebars from 'handlebars';
 import fs from 'fs';

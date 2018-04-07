@@ -52,8 +52,6 @@ li {
 {{/if}}
 
 {{#each fixtures as |fixture name|}}
-{{log 'This is fixture ' name}}
-{{log this}}
 <fieldset class="fixture"><legend>Fixture: {{name}}</legend>
   <ul>
   {{#each fixture.tests as |test testName|}}
