@@ -68,12 +68,6 @@ export default function () {
 			this.fixtureInfo[this.currentFixtureName].tests[name] = testRunInfo;
         },
 
-        renderErrors(errors) {
-            errors.forEach((error, id) => {
-                this.slack.addErrorMessage(this.formatError(error, `${id + 1} `));
-            })
-        },
-
         reportTaskDone (endTime, passed, warnings) {
 			console.log(`endTime ${endTime}, warnings ${warnings}`);
             const durationMs  = endTime - this.startTime;
@@ -96,8 +90,15 @@ export default function () {
 				return;
 			}
 
+			let from = getEnv('TESTCAFE_SMTP_FROM', null);
+			if (!from) {
+				let userInfo = require("os").userInfo();
+				from = `"${userInfo.username}" <${userInfo.email}>`;
+			}
+
 			// Pass all our data to the email builder for templating and sending.
 			let mail = new MailMessage({
+				from: from,
 				recipients: getEnv('TESTCAFE_SMTP_TO_LIST', 'test@example.com, test2@example.com'), // list of receivers
 				subject,
 				passed,
@@ -112,5 +113,5 @@ export default function () {
 			});
 			mail.send();
         }
-    }
+    };
 }

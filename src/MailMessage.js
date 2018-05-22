@@ -29,10 +29,9 @@ export default class MailMessage {
 		let transporter = nodemailer.createTransport(this.config.smtpOptions);
 
 		// setup email data with unicode symbols
-		let userInfo = require("os").userInfo();
 //		console.log('User info: ', userInfo);
 		let mailOptions = {
-			from: `"${userInfo.username}" <${userInfo.email}>`, // sender address
+			from: this.info.from, // sender address
 			to: this.info.recipients,
 			subject: this.info.subject, // Subject line
 			text: textBody, // plain text body

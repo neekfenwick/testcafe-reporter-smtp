@@ -26,6 +26,7 @@ The aim is that you can specify the below configuration parameters either entire
 - TESTCAFE_SMTP_SMTPUSER - username for authentication to your SMTP server
 - TESTCAFE_SMTP_SMTPPASS - password for authentication to your SMTP server
 - TESTCAFE_SMTP_SECURE   - true | false - passed to the `nodemailer` *secure* option (see [Security and TLS](#security-and-tls) below)
+- TESTCAFE_SMTP_FROM     - From address to use when sending email. If not provided, attempts to sniff using `require("os").userInfo()`
 - TESTCAFE_SMTP_TO_LIST  - comma separated list of email addresses to send reports to
 - TESTCAFE_SMTP_REPORTONLYFAILURES - causes no email to be sent if all tests passed (when you only want to be notified of tests failing)
 - TESTCAFE_SMTP_LOGGER   - true | false - passed to the `nodemailer` *logger* option, causes verbose output on the console
@@ -67,6 +68,8 @@ Alternatively, call the config file anything you want and set `TESTCAFE_SMTP_CON
 ```
 $ testcafe chrome 'path/to/test/file.js' --reporter smtp
 ```
+
+**Please Note:** The command line `testcafe` binary executes a forced process stop once the test has finished running, which will probably terminate before the SMTP communication has completed.  You may have better results using the runner API below.
 
 ### Running tests from a runner:
 
