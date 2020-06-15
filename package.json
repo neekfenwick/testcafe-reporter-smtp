@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-smtp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TestCafe SMTP reporter plugin.",
   "repository": {
     "type": "git",
