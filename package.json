@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-smtp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TestCafe SMTP reporter plugin.",
   "repository": {
     "type": "git",
@@ -27,21 +27,21 @@
     "plugin"
   ],
   "devDependencies": {
-    "del": "^1.2.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^5.2.1",
-    "gulp-mocha": "^2.2.0",
-    "normalize-newline": "^1.0.2",
-    "publish-please": "^2.1.4",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-mocha": "^7.0.2",
+    "normalize-newline": "^3.0.0",
+    "publish-please": "^5.5.1",
     "read-file-relative": "^1.2.0",
-    "testcafe": "^0.2.0-alpha"
+    "testcafe": "^1.8.6"
   },
   "dependencies": {
-    "config": "^1.30.0",
-    "dotenv": "^4.0.0",
-    "gulp-cli": "^2.0.1",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "gulp-cli": "^2.3.0",
     "gulp-env": "^0.4.0",
-    "handlebars": "^4.0.11",
-    "nodemailer": "^4.6.3"
+    "handlebars": "^4.7.6",
+    "nodemailer": "^6.4.8"
   }
 }

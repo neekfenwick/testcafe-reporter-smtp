@@ -21,14 +21,14 @@ function getEnv (key, _default) {
 }
 
 export default function () {
-    return {
+	return {
 
-        noColors: true,
+		noColors: true,
 
-        reportTaskStart (startTime, userAgents, testCount) {
+		reportTaskStart (startTime, userAgents, testCount) {
 			this.reportOnlyFailures = getEnv('TESTCAFE_SMTP_REPORTONLYFAILURES', 'true');
-            this.startTime = startTime;
-            this.testCount = testCount;
+			this.startTime = startTime;
+			this.testCount = testCount;
 			this.fixtureInfo = {}; // keyed by fixture name, data for email template
 			this.messages = [];
 			this.smtpOptions = {
@@ -46,17 +46,17 @@ export default function () {
 				this.smtpOptions.secure = secure;
 			}
 
-            this.messages.push(`Starting testcafe ${startTime}. \n Running tests in: ${userAgents}`);
-        },
+			this.messages.push(`Starting testcafe ${startTime}. \n Running tests in: ${userAgents}`);
+		},
 
-        reportFixtureStart (name, path) {
-            this.currentFixtureName = name;
+		reportFixtureStart (name, path) {
+			this.currentFixtureName = name;
 			this.fixtureInfo[name] = {
 				tests: {}
 			};
-        },
+		},
 
-        reportTestDone (name, testRunInfo) {
+		reportTestDone (name, testRunInfo) {
 			// Pretty format errors to a new property
 			if (testRunInfo.errs.length > 0) {
 				testRunInfo.formattedErrs = testRunInfo.errs.map((error, id) => {
@@ -66,27 +66,27 @@ export default function () {
 //			console.log('Test (' + name + ') results: ', testRunInfo);
 			// Record this test's results in the hash for this fixture.
 			this.fixtureInfo[this.currentFixtureName].tests[name] = testRunInfo;
-        },
+		},
 
-        reportTaskDone (endTime, passed, warnings) {
-			console.log(`endTime ${endTime}, warnings ${warnings}`);
-            const durationMs  = endTime - this.startTime;
-            const durationStr = this.moment
-                .duration(durationMs)
-                .format('h[h] mm[m] ss[s]');
+		reportTaskDone (endTime, passed, warnings) {
+			// console.log(`endTime ${endTime}, warnings ${warnings}`);
+			const durationMs  = endTime - this.startTime;
+			const durationStr = this.moment
+				.duration(durationMs)
+				.format('h[h] mm[m] ss[s]');
 			const failedCount = this.testCount - passed;
-//            let footer = passed === this.testCount ?
-//                `${this.testCount} passed` :
-//                `${failedCount}/${this.testCount} failed`;
+//			let footer = passed === this.testCount ?
+//				`${this.testCount} passed` :
+//				`${failedCount}/${this.testCount} failed`;
 
-//            footer = `\n*${footer}* (Duration: ${durationStr})`;
+//			footer = `\n*${footer}* (Duration: ${durationStr})`;
 
 			let subject = failedCount === 0 ?
-                `Tests passed OK : ${this.testCount} passed of ${this.testCount}` :
-                `TESTS FAILING : ${failedCount} of ${this.testCount} failed`;
+				`Tests passed OK : ${this.testCount} passed of ${this.testCount}` :
+				`TESTS FAILING : ${failedCount} of ${this.testCount} failed`;
 
 			if (failedCount === 0 && getEnv('TESTCAFE_SMTP_REPORTONLYFAILURES', '') === 'true') {
-				console.log('reporter-smtp: No failures, not sending email.');
+				// console.log('reporter-smtp: No failures, not sending email.');
 				return;
 			}
 
@@ -112,6 +112,6 @@ export default function () {
 				textTemplateFile: getEnv('TESTCAFE_SMTP_TEXT_EMAIL_TEMPLATE', path.join(__dirname, 'templates/defaultTEXT.handlebars'))
 			});
 			mail.send();
-        }
-    };
+		}
+	};
 }
