@@ -30,6 +30,7 @@ The aim is that you can specify the below configuration parameters either entire
 - TESTCAFE_SMTP_TO_LIST  - comma separated list of email addresses to send reports to
 - TESTCAFE_SMTP_REPORTONLYFAILURES - causes no email to be sent if all tests passed (when you only want to be notified of tests failing)
 - TESTCAFE_SMTP_LOGGER   - true | false - passed to the `nodemailer` *logger* option, causes verbose output on the console
+- TESTCAFE_SMTP_DEBUG    - anything | undefined - config settings are printed with console.log for debugging - *WARNING:* Will expose passwords and other sensitive information from your config!
 
 ### Security and TLS
 
@@ -37,7 +38,7 @@ You probably want the connection to your SMTP server to be encrypted using TLS. 
 
     secure – if true the connection will use TLS when connecting to server. If false (the default) then TLS is used if server supports the STARTTLS extension. In most cases set this value to true if you are connecting to port 465. For port 587 or 25 keep it false
 
-So, if you leave out `TESTCAFE_SMTP_SECURE`, the reporter will make a plaintext connection to your server, but if it response with STARTTLS then the connection will be upgraded to encryption using TLS before authentication is performed.
+So, if you leave out `TESTCAFE_SMTP_SECURE`, the reporter will make a plaintext connection to your server, but if it responds with STARTTLS then the connection will be upgraded to encryption using TLS before authentication is performed.
 
 ## Testing
 
@@ -45,7 +46,7 @@ Run the unit tests, which set a dummy SMTP hostname that causes the reporter to 
 
     $ npm test
 
-The unit test uses Mocha, and does not actually invoke a Testcafe test run.
+The unit test uses Mocha, and does not actually invoke a Testcafe test run or send any emails.
 
 ## Usage with TestCafe
 

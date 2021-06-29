@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-smtp",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "TestCafe SMTP reporter plugin.",
   "repository": {
     "type": "git",
@@ -8,7 +8,8 @@
   },
   "author": {
     "name": "Nick Fenwick",
-    "email": "neek@nickfenwick.com"
+    "email": "neek@nickfenwick.com",
+    "url": "https://github.com/neekfenwick"
   },
   "main": "lib/index",
   "files": [
@@ -17,31 +18,35 @@
   "scripts": {
     "test": "gulp test",
     "publish-please": "publish-please",
-    "prepublish": "publish-please guard",
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+    "prepublish": "publish-please guard"
   },
   "keywords": [
     "testcafe",
     "reporter",
     "plugin"
   ],
+  "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-eslint": "^10.0.1",
+    "callsite-record": "^3.2.0",
     "del": "^1.2.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^5.2.1",
-    "gulp-mocha": "^2.2.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-mocha": "^6.0.0",
     "normalize-newline": "^1.0.2",
-    "publish-please": "^2.1.4",
+    "publish-please": "^5.4.3",
     "read-file-relative": "^1.2.0",
-    "testcafe": "^0.2.0-alpha"
+    "testcafe": "^1.0.1"
   },
   "dependencies": {
-    "config": "^1.30.0",
-    "dotenv": "^4.0.0",
-    "gulp-cli": "^2.0.1",
-    "gulp-env": "^0.4.0",
-    "handlebars": "^4.0.11",
-    "nodemailer": "^4.6.3"
+    "@babel/runtime": "^7.3.4",
+    "dotenv": "^10.0.0",
+    "handlebars": "^4.7.7",
+    "nodemailer": "^6.6.2",
+    "path": "^0.12.7"
   }
 }

@@ -19,7 +19,7 @@ module.exports = [
                 'Chrome 41.0.2227 / Mac OS X 10.10.1',
                 'Firefox 47 / Mac OS X 10.10.1'
             ],
-            6
+            7
         ]
     },
     {
@@ -46,7 +46,6 @@ module.exports = [
         args:   [
             'Second test in first fixture',
             {
-                // errs: [],
                 errs: makeErrors([
                     {
 
@@ -60,7 +59,7 @@ module.exports = [
                         }
                     },
                     {
-                        err: new ActionElementNotFoundError(),
+                        err: new ActionElementNotFoundError({ apiFnChain: ['one', 'two', 'three'], apiFnIndex: 1 }),
 
                         metaInfo: {
                             userAgent:    'Firefox 47 / Mac OS X 10.10.1',
@@ -144,10 +143,9 @@ module.exports = [
         args:   [
             'First test in third fixture',
             {
-                // errs: [],
                 errs: makeErrors([
                     {
-                        err: new ActionElementNotFoundError(),
+                        err: new ActionElementNotFoundError({ apiFnChain: ['one', 'two', 'three'], apiFnIndex: 1 }),
 
                         metaInfo: {
                             userAgent:    'Firefox 47 / Mac OS X 10.10.1',
@@ -167,7 +165,7 @@ module.exports = [
         method: 'reportTaskDone',
         args:   [
             new Date('1970-01-01T00:15:25.000Z'),
-            6,
+            4,
             [
                 'Was unable to take a screenshot due to an error.\n\nReferenceError: someVar is not defined',
                 'Was unable to take a screenshot due to an error.\n\nReferenceError: someOtherVar is not defined',

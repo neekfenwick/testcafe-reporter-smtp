@@ -1,1 +1,122 @@
-TODO
+TESTS FAILING : 3 of 7 failed
+=============================================================================
+
+★ Messages:
+ - Starting testcafe Thu Jan 01 1970 07:00:00 GMT+0700 (Indochina Time).
+ Running tests in: Chrome 41.0.2227 / Mac OS X 10.10.1,Firefox 47 / Mac OS X 10.10.1
+
+☔ Warnings:
+ - Was unable to take a screenshot due to an error.
+
+ReferenceError: someVar is not defined
+ - Was unable to take a screenshot due to an error.
+
+ReferenceError: someOtherVar is not defined
+ - Was unable to take screenshots because the screenshot directory is not specified. To specify it, use the &quot;-s&quot; or &quot;--screenshots&quot; command line option or the &quot;screenshots&quot; method of the test runner in case you are using API.
+
+-----------------------------------------------------------------------------
+Fixture: First fixture
+-----------------------------------------------------------------------------
+  Test: First test in first fixture ✔ PASSED in 74000ms
+  Test: Second test in first fixture ✗ FAILED in 74000ms
+    ERRORS:
+1 undefinedA JavaScript error occurred on &quot;http://example.org&quot;.
+  Repeat test actions in the browser and check the console for errors.
+  To ignore client-side JavaScript errors, enable the &quot;--skip-js-errors&quot; CLI option, or set the &quot;skipJsErrors&quot; configuration file property to &quot;true&quot;.
+  If the website only throws this error when you test it with TestCafe, please create a new issue at:
+  &quot;https://github.com/DevExpress/testcafe/issues/new?template&#x3D;bug-report.md&quot;.
+
+  JavaScript error details:
+  Some error
+
+  Browser: Chrome 41.0.2227 / Mac OS X 10.10.1
+  Screenshot: /screenshots/1445437598847/errors
+
+     1 |var createCallsiteRecord &#x3D; require(&#x27;callsite-record&#x27;);
+     2 |
+     3 |function someFunc () {
+   &gt; 4 |    throw new Error(&#x27;Hey ya!&#x27;);
+     5 |}
+     6 |
+     7 |try {
+     8 |    someFunc();
+     9 |}
+
+     at someFunc (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at &lt;anonymous&gt; (some-file:1:1)
+     at Mocha.loadFiles (some-file:1:1)
+     at Mocha.run (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+2 undefinedThe specified selector does not match any element in the DOM tree.
+
+     | one
+   &gt; |   two
+     |   three
+
+  Browser: Firefox 47 / Mac OS X 10.10.1
+
+     1 |var createCallsiteRecord &#x3D; require(&#x27;callsite-record&#x27;);
+     2 |
+     3 |function someFunc () {
+   &gt; 4 |    throw new Error(&#x27;Hey ya!&#x27;);
+     5 |}
+     6 |
+     7 |try {
+     8 |    someFunc();
+     9 |}
+
+     at someFunc (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at &lt;anonymous&gt; (some-file:1:1)
+     at Mocha.loadFiles (some-file:1:1)
+     at Mocha.run (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+  Test: Third test in first fixture ✔ PASSED in 74000ms
+
+-----------------------------------------------------------------------------
+Fixture: Second fixture
+-----------------------------------------------------------------------------
+  Test: First test in second fixture ✔ PASSED in 74000ms
+  Test: Second test in second fixture ✔ PASSED in 74000ms
+  Test: Third test in second fixture ✔ PASSED in 0ms
+
+-----------------------------------------------------------------------------
+Fixture: Third fixture
+-----------------------------------------------------------------------------
+  Test: First test in third fixture ✗ FAILED in 74000ms
+    ERRORS:
+1 undefinedThe specified selector does not match any element in the DOM tree.
+
+     | one
+   &gt; |   two
+     |   three
+
+  Browser: Firefox 47 / Mac OS X 10.10.1
+
+     1 |var createCallsiteRecord &#x3D; require(&#x27;callsite-record&#x27;);
+     2 |
+     3 |function someFunc () {
+   &gt; 4 |    throw new Error(&#x27;Hey ya!&#x27;);
+     5 |}
+     6 |
+     7 |try {
+     8 |    someFunc();
+     9 |}
+
+     at someFunc (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+     at &lt;anonymous&gt; (some-file:1:1)
+     at Mocha.loadFiles (some-file:1:1)
+     at Mocha.run (some-file:1:1)
+     at Object.&lt;anonymous&gt; (some-file:1:1)
+

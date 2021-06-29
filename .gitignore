@@ -1,7 +1,2 @@
-.idea
+lib
 node_modules
-media
-lib/*.js
-lib/templates
-nbproject
-.env-private
