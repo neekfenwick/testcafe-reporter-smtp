@@ -40,7 +40,7 @@
     "normalize-newline": "^1.0.2",
     "publish-please": "^5.4.3",
     "read-file-relative": "^1.2.0",
-    "testcafe": "^1.0.1"
+    "testcafe": "^3.7.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
