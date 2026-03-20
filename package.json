@@ -16,7 +16,11 @@
     "lib"
   ],
   "scripts": {
-    "test": "gulp test",
+    "clean": "rm -rf lib",
+    "lint": "eslint src/**/*.js test/**/*.js",
+    "build": "npm run clean && cp -r src lib",
+    "test": "npm run lint && npm run build && TESTCAFE_SMTP_SMTPHOST=unit-test-mock mocha test/test.js --ui bdd --reporter spec --timeout 20000",
+    "preview": "npm run build && node -e \"const plugin=require('testcafe').embeddingUtils.buildReporterPlugin(require('./lib')); require('./test/utils/reporter-test-calls').forEach(call=>plugin[call.method].apply(plugin,call.args)); process.exit(0);\"",
     "publish-please": "publish-please",
     "prepublish": "publish-please guard"
   },
@@ -26,27 +30,25 @@
     "plugin"
   ],
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/plugin-transform-runtime": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "babel-eslint": "^10.0.1",
-    "callsite-record": "^3.2.0",
-    "del": "^1.2.0",
-    "gulp": "^4.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-eslint": "^5.0.0",
-    "gulp-mocha": "^10.0.1",
+    "@babel/eslint-parser": "^7.29.7",
+    "callsite-record": "^3.2.2",
+    "del": "^7.1.0",
+    "eslint": "^8.57.1",
+    "mocha": "^10.8.2",
     "normalize-newline": "^1.0.2",
-    "publish-please": "^5.4.3",
+    "publish-please": "^5.5.2",
     "read-file-relative": "^1.2.0",
-    "testcafe": "^3.7.2"
+    "testcafe": "^3.7.5"
   },
   "dependencies": {
-    "@babel/runtime": "^7.3.4",
-    "dotenv": "^10.0.0",
-    "handlebars": "^4.7.7",
-    "nodemailer": "^9.0.1",
-    "path": "^0.12.7"
+    "@babel/runtime": "^7.29.7",
+    "path": "^0.12.7",
+    "dotenv": "^16.6.1",
+    "handlebars": "^4.7.9",
+    "nodemailer": "^9.0.1"
   }
 }
